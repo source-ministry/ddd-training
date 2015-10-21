@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+
+{% block body -%}
+    <h3><i class="glyphicon glyphicon-user"></i> Reader list</h3>
+
+    <hr>
+
+    <div class="row">
+        <!-- center left-->
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Enabled</th>
+                    <th>Books lent</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('reader_show', { 'id': entity.id }) }}">{{ entity.fullName }}</a></td>
+                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.enabled }}</td>
+                        <td>{{ entity.booksCount }}</td>
+                        <td>
+                            <a href="{{ path('reader_edit', {'id':entity.id}) }}">
+                                <i class="glyphicon glyphicon-edit"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="col-md-12">
+                <a href="{{ path('reader_new') }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-plus"></i> Add New Reader
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

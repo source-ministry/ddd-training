@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+
+{% block body -%}
+    <h3><i class="glyphicon glyphicon-registration-mark"></i> Edition Details</h3>
+
+    <hr>
+
+    <div class="row">
+        <!-- center left-->
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>ISBN</th>
+                    <td>{{ entity.isbn }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ entity.name }}</td>
+                </tr>
+                <tr>
+                    <th>Author</th>
+                    <td>{{ entity.author }}</td>
+                </tr>
+                <tr>
+                    <th>Release Date</th>
+                    <td>{{ entity.releaseDate.format('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <th>Number of pages</th>
+                    <td>{{ entity.numberOfPages }}</td>
+                </tr>
+                <tr>
+                    <th>Copies</th>
+                    <td>
+
+                        <div class="list-group">
+                            {% for copy in entity.copies %}
+                                <a href="{{ path("bookcopy_show", { 'id': copy.id }) }}"
+                                   class="list-group-item">{% if copy.available %}Available{% else %}Lent by {{ copy.reader.fullName }}{% endif %}</a>
+                            {% else %}
+                                <span>No copies</span>
+                            {% endfor %}
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <a href="{{ path('bookcopy_new', {'editionId':entity.id}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-plus"></i> Add a copy
+            </a>
+        </div>
+    </div>
+{% endblock %}

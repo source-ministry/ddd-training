@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block body -%}
+    <h3><i class="glyphicon glyphicon-registration-user"></i> Edit Reader</h3>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ form(edit_form, { 'attr': {'class': 'table table-striped'} }) }}
+        </div>
+
+        <div class="col-md-12">
+            {{ form(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

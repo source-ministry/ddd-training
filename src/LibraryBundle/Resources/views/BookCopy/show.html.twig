@@ -1,0 +1,41 @@
+{% extends "::base.html.twig" %}
+
+{% block body -%}
+    <h3><i class="glyphicon glyphicon-registration-mark"></i> BookCopy Details</h3>
+
+    <hr>
+
+    <div class="row">
+        <!-- center left-->
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>
+                        <a href="{{ path("bookedition_show", {'id' : entity.edition.id}) }}">{{ entity.edition.name }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Added to library at</th>
+                    <td>{{ entity.addedToLibraryAt.format('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <th>Lent by</th>
+                    <td>
+                        {% if not entity.available %}
+                            <a href="{{ path("reader_show", {'id' : entity.reader.id}) }}">{{ entity.reader.fullName }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-12">
+            <a href="{{ path('bookcopy_edit', {'id':entity.id}) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-edit"></i> Edit
+            </a>
+        </div>
+    </div>
+{% endblock %}
